@@ -19,6 +19,16 @@ struct ARViewContainer: UIViewRepresentable {
         
         let arView = ARView(frame: .zero)
         
+        let sphere = MeshResource.generateSphere(radius: 0.02)
+        let material = SimpleMaterial()
+        let sphereModel = ModelEntity(mesh: sphere, materials: [material])
+        
+        let cameraAnchor = AnchorEntity(.camera)
+        cameraAnchor.addChild(sphereModel)
+        cameraAnchor.transform.translation = [-0.3, 0.5, -2.5]
+        
+        arView.scene.anchors.append(cameraAnchor)
+        
         return arView
     }
     
